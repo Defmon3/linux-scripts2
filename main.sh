@@ -26,7 +26,7 @@ sudo nala install curl -y || { ehighlight "Failed to install Curl"; exit 1; }
 
 highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
-sudo bash ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
+sudo -e bash ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
 
 
 highlight "<<< Installing oh-my-posh >>>"
