@@ -5,7 +5,7 @@ set -e
 
 # Define the installation directories
 FONT_DIR=$HOME/.local/share/fonts
-THEME_DIR=/etc/oh-my-posh/themes  # Custom theme directory
+THEME_DIR=/.local/oh-my-posh/themes  # Custom theme directory
 
 # Create directories if they do not exist
 mkdir -p $FONT_DIR
