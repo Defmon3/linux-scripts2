@@ -33,11 +33,6 @@ echo -e "source $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 highlight ".zshrc created and updated successfully."
 
-# Update /etc/zsh/zshenv to ensure it knows about ZDOTDIR
-
-
-#!/bin/bash
-
 # Define the file path
 ZSHRC="$ZDOTDIR/.zshrc"
 
