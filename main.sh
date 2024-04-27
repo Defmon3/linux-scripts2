@@ -1,6 +1,6 @@
 #!/bin/bash
 # main.sh and others
-source ./common.sh
+source ./util.sh
 
 USERNAME="alpha"
 export USERNAME
@@ -8,8 +8,8 @@ export USERNAME
 # Main script begins
 highlight "<<< Updating system >>>"
 
-chmod +x ./system-setup.sh
-./system-setup.sh || { ehighlight "System setup failed"; exit 1; }
+#chmod +x ./system-setup.sh
+#./system-setup.sh || { ehighlight "System setup failed"; exit 1; }
 
 highlight "<<< Sudo update && upgrade >>>"
 sudo apt-get update -y >/dev/null 2>&1 || { ehighlight "Update failed"; exit 1; }
