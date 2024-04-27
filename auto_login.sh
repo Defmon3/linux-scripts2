@@ -9,9 +9,9 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-echo "Configuring auto-login for $USERNAME..."
-if output=$(id "$USERNAME" 2>&1); then
-    echo "Configuring auto-login for $USERNAME..."
+echo "Configuring auto-login for $USER..."
+if output=$(id "$USER" 2>&1); then
+    echo "Configuring auto-login for $USER..."
 else
     echo "Error: $output"
     exit 1
@@ -27,7 +27,7 @@ if [[ -f "$GDM_CUSTOM_CONF" ]]; then
 
     # Setting up auto-login
     sed -i '/\[daemon\]/a AutomaticLoginEnable=True' $GDM_CUSTOM_CONF
-    sed -i "/AutomaticLoginEnable=True/a AutomaticLogin=$USERNAME" $GDM_CUSTOM_CONF
+    sed -i "/AutomaticLoginEnable=True/a AutomaticLogin=$USER" $GDM_CUSTOM_CONF
 
     highlight "Auto-login configured successfully."
 else
