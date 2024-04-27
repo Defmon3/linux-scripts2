@@ -9,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-
+echo "Configuring auto-login for $USERNAME..."
 if output=$(id "$USERNAME" 2>&1); then
     echo "Configuring auto-login for $USERNAME..."
 else

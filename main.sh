@@ -3,7 +3,7 @@
 source ./util.sh
 
 USERNAME="alpha"
-export USERNAME
+export $USERNAME
 
 # Main script begins
 highlight "<<< Updating system >>>"
