@@ -27,10 +27,13 @@ git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete.git "$ZSH_
 highlight "Plugins cloned successfully."
 ó
 # Update the .zshrc to use the new plugins
-echo -e "source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsG" > "$ZDOTDIR/.zshrc"
-echo -e "source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zshG" > "$ZDOTDIR/.zshrc"
-echo -e "source $ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" > "$ZDOTDIR/.zshrc"
-echo -e "source $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh" > "$ZDOTDIR/.zshrc"
+
+
+echo -e "source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zshG" | tee -a "$ZDOTDIR/.zshrc"
+echo -e "source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zshG" | tee -a "$ZDOTDIR/.zshrc"
+echo -e "source $ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" | tee -a "$ZDOTDIR/.zshrc"
+echo -e "source $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh" | tee -a "$ZDOTDIR/.zshrc"
+
 highlight ".zshrc created and updated successfully."
 
 # Update /etc/zsh/zshenv to ensure it knows about ZDOTDIR
