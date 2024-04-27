@@ -8,8 +8,10 @@ FONT_DIR=$HOME/.local/share/fonts
 THEME_DIR=/.local/oh-my-posh/themes  # Custom theme directory
 
 # Create directories if they do not exist
-mkdir -p $FONT_DIR
-mkdir -p $THEME_DIR
+echo $USERPASS | sudo -S mkdir -p $FONT_DIR
+echo $USERPASS | sudo -S mkdir -p $THEME_DIR
+sudo -S chown -R alpha:alpha $FONT_DIR
+sudo -S chown -R alpha:alpha $THEME_DIR
 
 # Download and install Fira Code Nerd Font
 echo "Downloading Fira Code Nerd Font..."
