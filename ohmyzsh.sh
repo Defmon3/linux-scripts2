@@ -9,9 +9,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
-mkdir -p "$ZDOTDIR" "$ZSH_CUSTOM/plugins"
-
-
 
 sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1
 highlight "Zsh and plugins installed successfully."
@@ -25,7 +22,7 @@ git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "$ZS
 git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete.git "$ZSH_CUSTOM/plugins/zsh-autocomplete" > /dev/null 2>&1
 
 highlight "Plugins cloned successfully."
-ó
+
 # Update the .zshrc to use the new plugins
 
 
