@@ -10,7 +10,17 @@ ehighlight() {
 
 read -sp "Enter your sudo password: " sudopass
 export SUDOPASS=$sudopass
-echo $SUDOPASS | sudo -S echo "Thank you for providing your password $SUDOPASS"
+echo $SUDOPASS | sudo -S echo "Thank you for providing your password"
+
+if [ $? -ne 0 ]; then
+    echo "Failed to authenticate with sudo."
+    exit 1
+fi
+
+# If the script reaches this point, the sudo authentication was successful
+echo "Sudo authentication successful."
+
+
 # Main script begins
 highlight "<<< Updating system >>>"
 
@@ -28,7 +38,6 @@ sudo nala install curl terminator -y || { ehighlight "Failed to install Curl"; e
 
 ehighlight "<<< Exit early for nala>>>"
 
-exit 1
 
 highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
