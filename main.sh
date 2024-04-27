@@ -17,12 +17,12 @@ sudo apt-get update -y >/dev/null 2>&1 || { ehighlight "Update failed"; exit 1; 
 sudo apt-get upgrade -y >/dev/null 2>&1 || { ehighlight "Upgrade failed"; exit 1; }
 
 highlight "<<< Installing Nala >>>"
-sudo apt-get install nala -y > /dev/null 2>&1 || { ehighlight "Failed to install Nala"; exit 1; }
+sudo apt install nala -y > /dev/null 2>&1 || { ehighlight "Failed to install Nala"; exit 1; }
 echo "Updating Nala..."
 sudo nala update > /dev/null 2>&1 || { ehighlight "Failed to update Nala"; exit 1; }
 
 highlight "<<< Installing Curl >>>"
-sudo nala install curl -y || { ehighlight "Failed to install Curl"; exit 1; }
+sudo nala install curl terminator -y || { ehighlight "Failed to install Curl"; exit 1; }
 
 highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
