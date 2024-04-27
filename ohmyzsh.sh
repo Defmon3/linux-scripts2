@@ -17,41 +17,24 @@ mkdir -p "$ZDOTDIR" "$ZSH_CUSTOM/plugins" || {
 }
 
 
-# Install Zsh and plugins
-if ! sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1; then
-    ehighlight "Error installing Zsh and plugins." >&2
-    exit 1
-fi
+sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1
 highlight "Zsh and plugins installed successfully."
 
-# Install Oh My Zsh unattendedly
-if ! sh -c "ZSH=$ZSH ZDOTDIR=$ZDOTDIR sh -c \$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1; then
-    ehighlight "Error installing Oh My Zsh." >&2
-    exit 1
-fi
-highlight "Oh My Zsh installed successfully in $ZSH."
 
-# Clone necessary plugins
-plugins=(
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    fast-syntax-highlighting
-    zsh-autocomplete
-)
-for plugin in "${plugins[@]}"; do
-    git_url="https://github.com/zsh-users/$plugin.git"
-    git_url=${git_url/fast-syntax-highlighting=https://github.com/zdharma-continuum/fast-syntax-highlighting.git}
-    git_url=${git_url/zsh-autocomplete=https://github.com/marlonrichert/zsh-autocomplete.git}
-    if ! git clone --depth 1 "$git_url" "$ZSH_CUSTOM/plugins/$plugin" > /dev/null 2>&1; then
-        ehighlight "Error cloning $plugin." >&2
-        exit 1
-    fi
-done
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended  > /dev/null 2>&1
+
+! git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions" > /dev/null 2>&1
+   ! git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" > /dev/null 2>&1
+   ! git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "$ZSH_CUSTOM/plugins/fast-syntax-highlighting" > /dev/null 2>&1
+   ! git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete.git "$ZSH_CUSTOM/plugins/zsh-autocomplete" > /dev/null 2>&1
+
 highlight "Plugins cloned successfully."
-
+ó
 # Update the .zshrc to use the new plugins
-NEW_STRING="source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh\nsource $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\nsource $ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh\nsource $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
-echo -e "$NEW_STRING" > "$ZDOTDIR/.zshrc"
+echo -e "source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsG" > "$ZDOTDIR/.zshrc"
+echo -e "source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zshG" > "$ZDOTDIR/.zshrc"
+echo -e "source $ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" > "$ZDOTDIR/.zshrc"
+echo -e "source $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh" > "$ZDOTDIR/.zshrc"
 highlight ".zshrc created and updated successfully."
 
 # Update /etc/zsh/zshenv to ensure it knows about ZDOTDIR
