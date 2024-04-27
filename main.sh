@@ -5,6 +5,8 @@ chmod +x ./system-setup.sh
 
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install nala  -y
+sudo nala update -y
+sudo nala install curl
 
 chmod +x ./ohmyzsh.sh
 ./ohmyzsh.sh
