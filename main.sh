@@ -9,9 +9,6 @@ ehighlight() {
 }
 
 
-USERNAME="alpha"
-export USERNAME
-
 # Main script begins
 highlight "<<< Updating system >>>"
 
