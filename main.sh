@@ -33,6 +33,7 @@ chmod +x ./sublime.sh
 
 highlight "<<< Setting up auto login >>>"
 chmod +x ./auto_login.sh
-./auto_login.sh || { ehighlight "Auto login setup failed"; exit 1; }
+sudo ./auto_login.sh || { ehighlight "Auto login setup failed"; exit 1; }
+
 # Speed up Ubuntu boot
 # https://itsfoss.com/speed-up-ubuntu-131

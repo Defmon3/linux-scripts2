@@ -20,3 +20,4 @@ type: reboot
 
 run:
 sudo apt-get install git -y && cd .config && git clone https://github.com/Defmon3/linux-scripts2.git && cd linux-scripts2 && bash ./main.sh
+wget -qO- https://raw.githubusercontent.com/Defmon3/linux-scripts2/main/install.sh | sudo bash
