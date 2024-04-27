@@ -29,7 +29,7 @@ chmod +x ./ohmyzsh.sh
 ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
 
 
-highlight "<<< Installing oh-my-zsh >>>"
+highlight "<<< Installing oh-my-posh >>>"
 chmod +x ./ohmyposh.sh
 ./ohmyposh.sh || { ehighlight "oh-my-posh installation failed"; exit 1; }
 
