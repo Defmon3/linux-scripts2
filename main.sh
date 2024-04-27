@@ -38,7 +38,7 @@ sudo bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
 
 
 # reboot
-reboot
 
+#
 # Speed up Ubuntu boot
 # https://itsfoss.com/speed-up-ubuntu-131
