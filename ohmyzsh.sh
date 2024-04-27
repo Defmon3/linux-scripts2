@@ -11,23 +11,6 @@ ehighlight() {
 # Ensure XDG_CONFIG_HOME is set, default to ~/.config if not set
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-BASHRC="$HOME/.bashrc"
-XDG_CONFIG_LINE="export XDG_CONFIG_HOME=\"\$XDG_CONFIG_HOME\""
-
-# Check if .bashrc exists. If not, create it.
-if [ ! -f "$BASHRC" ]; then
-    echo "#!/bin/bash" > "$BASHRC"
-    echo "# .bashrc: executed by bash(1) for non-login shells." >> "$BASHRC"
-    echo "export PS1='\h:\w\$ '" >> "$BASHRC"
-    echo "Created new .bashrc file."
-fi
-
-# Check if XDG_CONFIG_HOME is already set in .bashrc
-if ! grep -q "XDG_CONFIG_HOME" "$BASHRC"; then
-    echo "$XDG_CONFIG_LINE" >> "$BASHRC"
-    echo "Added XDG_CONFIG_HOME to $BASHRC"
-fi
-
 # Define ZSH and ZDOTDIR environment
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
@@ -37,6 +20,9 @@ mkdir -p "$ZDOTDIR" "$ZSH_CUSTOM/plugins" || {
     ehighlight "Error creating directories." >&2
     exit 1
 }
+
+# Add ZDOTDIR to .zshenv to make it persistent
+echo "export ZDOTDIR='$ZDOTDIR'" > "$HOME/.zshenv"
 
 # Install Zsh and plugins
 if ! sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1; then
