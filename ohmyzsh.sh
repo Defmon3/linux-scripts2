@@ -25,7 +25,7 @@ fi
 if sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" > /dev/null 2>&1; then
     echo "Oh My Zsh installed successfully."
 else
-    echo "Error installing Oh My Zsh." >&2
+    ehighlight "Error installing Oh My Zsh." >&2
 fi
 
 # Clone necessary plugins
@@ -35,7 +35,7 @@ if git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/p
    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git "$ZSH_CUSTOM/plugins/zsh-autocomplete" > /dev/null 2>&1; then
     echo "Plugins cloned successfully."
 else
-    echo "Error cloning one or more plugins." >&2
+    ehighlight "Error cloning one or more plugins." >&2
 fi
 
 # Update the .zshrc to use the new plugins
@@ -43,12 +43,12 @@ if [ -f "$HOME/.zshrc" ]; then
     if sed -i "s/$OLD_STRING/$NEW_STRING/g" "$HOME/.zshrc"; then
         echo ".zshrc updated successfully."
     else
-        echo "Error updating .zshrc." >&2
+        ehighlight "Error updating .zshrc." >&2
     fi
 else
     if echo "$NEW_STRING" > "$HOME/.zshrc"; then
         echo ".zshrc created and updated successfully."
     else
-        echo "Error creating .zshrc." >&2
+        ehighlight "Error creating .zshrc." >&2
     fi
 fi
