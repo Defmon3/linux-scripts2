@@ -56,9 +56,9 @@ highlight "Plugins cloned successfully."
 # Update the .zshrc to use the new plugins
 NEW_STRING="source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh\nsource $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\nsource $ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh\nsource $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 if [ -f "$ZDOTDIR/.zshrc" ]; then
-    echo "$NEW_STRING" >> "$ZDOTDIR/.zshrc"
+    echo -e "$NEW_STRING" > "$ZDOTDIR/.zshrc"
     highlight ".zshrc updated successfully."
 else
-    echo "$NEW_STRING" > "$ZDOTDIR/.zshrc"
+    echo -e "$NEW_STRING" > "$ZDOTDIR/.zshrc"
     highlight ".zshrc created and updated successfully."
 fi
