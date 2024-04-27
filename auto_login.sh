@@ -10,14 +10,12 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 
-# Check if the user exists
-if id "$USERNAME" &>/dev/null; then
+if output=$(id "$USERNAME" 2>&1); then
     echo "Configuring auto-login for $USERNAME..."
 else
-    ehighlight "Error: User does not exist."
+    echo "Error: $output"
     exit 1
 fi
-
 # Path to GDM3 custom configuration
 GDM_CUSTOM_CONF="/etc/gdm3/custom.conf"
 
