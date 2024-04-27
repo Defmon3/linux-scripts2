@@ -44,7 +44,7 @@ EOF
 # Define the file path
 ZSHRC="$ZDOTDIR/.zshrc"
 
-sed -i '' '/^plugins=(git)$/c\
+sed -i  '/^plugins=(git)$/c\
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
 ' "$ZSHRC"
 
@@ -53,4 +53,4 @@ echo "Plugins line updated successfully in $ZSHRC"
 
 
 # Change the default shell to zsh
-chsh -s $(which zsh) -y
+chsh -s $(which zsh)
