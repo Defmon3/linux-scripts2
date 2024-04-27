@@ -5,7 +5,7 @@ chmod +x ./system-setup.sh
 ./system-setup.sh
 
 echo "<<< Sudo update && upgrade >>>"
-sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get update -y && sudo apt-get upgrade -y /dev/null 2>&1
 
 echo "<<< Installing Nala >>>"
 sudo apt-get install nala  -y
