@@ -48,4 +48,4 @@ echo "Plugins line updated successfully in $ZSHRC"
 
 
 # Change the default shell to zsh
-chsh -s $(which zsh)
+echo $USERPASS | sudo -S chsh -s $(which zsh)

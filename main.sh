@@ -26,6 +26,10 @@ sudo nala update > /dev/null 2>&1 || { ehighlight "Failed to update Nala"; exit 
 highlight "<<< Installing Curl >>>"
 sudo nala install curl terminator -y || { ehighlight "Failed to install Curl"; exit 1; }
 
+ehighlight "<<< Exit early for nala>>>"
+
+exit 1
+
 highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
 bash ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
