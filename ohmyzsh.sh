@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
+highlight() {
+    echo -e "\033[1m\033[43m$1\033[0m"
+}
+
 ehighlight() {
     echo -e "\033[1m\033[41m$1\033[0m"
 }
+
 
 
 # Ensure XDG_CONFIG_HOME is set, default to ~/.config if not set
@@ -22,8 +27,8 @@ else
 fi
 
 # Install Oh My Zsh
-if sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" > /dev/null 2>&1; then
-    echo "Oh My Zsh installed successfully."
+if sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1; then
+    highlight "Oh My Zsh installed successfully."
 else
     ehighlight "Error installing Oh My Zsh." >&2
 fi
@@ -33,7 +38,7 @@ if git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/p
    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" > /dev/null 2>&1 &&
    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "$ZSH_CUSTOM/plugins/fast-syntax-highlighting" > /dev/null 2>&1 &&
    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git "$ZSH_CUSTOM/plugins/zsh-autocomplete" > /dev/null 2>&1; then
-    echo "Plugins cloned successfully."
+    highlight "Plugins cloned successfully."
 else
     ehighlight "Error cloning one or more plugins." >&2
 fi
@@ -41,13 +46,13 @@ fi
 # Update the .zshrc to use the new plugins
 if [ -f "$HOME/.zshrc" ]; then
     if sed -i "s/$OLD_STRING/$NEW_STRING/g" "$HOME/.zshrc"; then
-        echo ".zshrc updated successfully."
+        highlight ".zshrc updated successfully."
     else
         ehighlight "Error updating .zshrc." >&2
     fi
 else
     if echo "$NEW_STRING" > "$HOME/.zshrc"; then
-        echo ".zshrc created and updated successfully."
+        highlight ".zshrc created and updated successfully."
     else
         ehighlight "Error creating .zshrc." >&2
     fi
