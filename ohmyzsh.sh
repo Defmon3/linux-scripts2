@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+ehighlight() {
+    echo -e "\033[1m\033[41m$1\033[0m"
+}
+
+
 # Ensure XDG_CONFIG_HOME is set, default to ~/.config if not set
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
@@ -13,7 +18,7 @@ mkdir -p "$ZSH_CUSTOM/plugins" 2>/dev/null
 if sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1; then
     echo "Zsh and plugins installed successfully."
 else
-    echo "Error installing Zsh and plugins." >&2
+    ehighlight "Error installing Zsh and plugins." >&2
 fi
 
 # Install Oh My Zsh
