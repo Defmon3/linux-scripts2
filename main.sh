@@ -8,7 +8,9 @@ ehighlight() {
     echo -e "\033[1m\033[41m$1\033[0m"
 }
 
-
+read -sp "Enter your sudo password: " sudopass
+export SUDOPASS=$sudopass
+echo $SUDOPASS | sudo -S echo "Thank you for providing your password $SUDOPASS"
 # Main script begins
 highlight "<<< Updating system >>>"
 
@@ -39,7 +41,7 @@ chmod +x ./sublime.sh
 
 highlight "<<< Setting up auto login >>>"
 chmod +x ./auto_login.sh
-sudo bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
+echo $sudopass | sudo -S bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
 
 
 
