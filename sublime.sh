@@ -17,4 +17,4 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo nala update
 
 # Install Sublime Text with Nala
-sudo nala install sublime-text
+sudo nala install sublime-text -y
