@@ -1,3 +1,7 @@
+
+Might want to ensure max graphics memory and bidirectional clipboard before logging in.
+
+
 If you can not open terminal:
 Go to settings->region 
 change to canada
@@ -13,6 +17,10 @@ type your password
 type: usermod -aG sudo <your_username>
 type: groups <your_username>
 type: reboot
+
+
+
+
 
 sudo apt-get install git
 cd .config

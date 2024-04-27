@@ -1,5 +1,8 @@
 #!/bin/bash
+USERNAME="alpha"
 
+# Export the username so it can be accessed by other scripts
+export USERNAME
 # Function to highlight text
 highlight() {
     echo -e "\033[1m\033[43m$1\033[0m"
@@ -35,5 +38,8 @@ highlight "<<< Installing Sublime >>>"
 chmod +x ./sublime.sh
 ./sublime.sh || { ehighlight "Sublime installation failed"; exit 1; }
 
+highlight "<<< Setting up auto login >>>"
+chmod +x ./auto_login.sh
+./auto_login.sh || { ehighlight "Auto login setup failed"; exit 1; }
 # Speed up Ubuntu boot
 # https://itsfoss.com/speed-up-ubuntu-131
