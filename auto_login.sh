@@ -1,46 +1,44 @@
 #!/bin/bash
 
-# main.sh and others
-source ./util.sh
-
 # Ensure the script is run as root
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root"
+   echo "This script must be run as root" >&2
    exit 1
 fi
 
-# Define the target user for auto-login, here assumed to be the current user or set manually
-target_user=$USER  # or set manually e.g., target_user="username"
+# Backup the original configuration file
+cp /etc/gdm3/custom.conf /etc/gdm3/custom.conf.bak
 
-echo "Configuring auto-login for $target_user..."
-if output=$(id "$target_user" 2>&1); then
-    echo "User $target_user exists, proceeding with configuration..."
-else
-    echo "Error: $output"
-    exit 1
-fi
+# Write the new configuration
+cat <<EOF | sudo tee /etc/gdm3/custom.conf
+# GDM configuration storage
+#
+# See /usr/share/gdm/gdm.schemas for a list of available options.
 
-# Path to GDM3 custom configuration
-GDM_CUSTOM_CONF="/etc/gdm3/custom.conf"
+[daemon]
+# Uncomment the line below to force the login screen to use Xorg
+#WaylandEnable=false
 
-# Check if the GDM custom configuration file exists
-if [[ -f "$GDM_CUSTOM_CONF" ]]; then
-    # Backup the original configuration file
-    cp "$GDM_CUSTOM_CONF" "${GDM_CUSTOM_CONF}.bak"
-    echo "Backup of the original GDM configuration created at ${GDM_CUSTOM_CONF}.bak"
+# Enabling automatic login
+AutomaticLoginEnable = true
+AutomaticLogin = $USER
 
-    # Setting up auto-login
-    if ! grep -q "AutomaticLoginEnable=True" "$GDM_CUSTOM_CONF"; then
-        sed -i '/\[daemon\]/a AutomaticLoginEnable=True' "$GDM_CUSTOM_CONF"
-        sed -i "/AutomaticLoginEnable=True/a AutomaticLogin=$target_user" "$GDM_CUSTOM_CONF"
-        highlight "Auto-login configured successfully for $target_user."
-    else
-        highlight "Auto-login is already configured for $target_user."
-    fi
-else
-    ehighlight "Error: GDM3 configuration file does not exist."
-    exit 1
-fi
+# Enabling timed login
+# TimedLoginEnable = true
+# TimedLogin = user1
+# TimedLoginDelay = 10
 
-# Inform user to reboot the system
-echo "Please reboot your system to apply the changes."
+[security]
+
+[xdmcp]
+
+[chooser]
+
+[debug]
+# Uncomment the line below to turn on debugging
+# More verbose logs
+# Additionally lets the X server dump core if it crashes
+#Enable=true
+EOF
+
+echo "GDM configuration updated. A backup was made at /etc/gdm3/custom.conf.bak"

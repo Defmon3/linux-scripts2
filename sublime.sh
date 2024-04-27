@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
 # Source common functions for highlighting
-source ./util.sh
+highlight() {
+    echo -e "\033[1m\033[43m$1\033[0m"
+}
+
+ehighlight() {
+    echo -e "\033[1m\033[41m$1\033[0m"
+}
+
 
 # Import the Sublime Text repository GPG key
 if wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null; then
