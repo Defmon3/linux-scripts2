@@ -1,6 +1,5 @@
 #!/bin/bash
 # main.sh and others
-
 highlight() {
     echo -e "\033[1m\033[43m$1\033[0m"
 }
@@ -9,11 +8,18 @@ ehighlight() {
     echo -e "\033[1m\033[41m$1\033[0m"
 }
 
-# Ask for the sudo password at the beginning of the script to ensure sudo access
-sudo -v
+read -sp "Enter your sudo password: " sudopass
+export SUDOPASS=$sudopass
+echo $SUDOPASS | sudo -S echo "Thank you for providing your password"
 
-# Keep sudo alive throughout the execution of this script
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+if [ $? -ne 0 ]; then
+    echo "Failed to authenticate with sudo."
+    exit 1
+fi
+
+# If the script reaches this point, the sudo authentication was successful
+echo "Sudo authentication successful."
+
 
 # Main script begins
 highlight "<<< Updating system >>>"
@@ -31,19 +37,25 @@ highlight "<<< Installing Curl >>>"
 sudo nala install curl terminator -y || { ehighlight "Failed to install Curl"; exit 1; }
 
 highlight "<<< Installing oh-my-zsh >>>"
-bash ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
+chmod +x ./ohmyzsh.sh
+bash ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
 
 highlight "<<< Installing oh-my-posh >>>"
-bash ohmyposh.sh || { ehighlight "oh-my-posh installation failed"; exit 1; }
+chmod +x ./ohmyposh.sh
+./ohmyposh.sh || { ehighlight "oh-my-posh installation failed"; exit 1; }
 
 highlight "<<< Installing Sublime >>>"
-bash sublime.sh || { ehighlight "Sublime installation failed"; exit 1; }
+chmod +x ./sublime.sh
+./sublime.sh || { ehighlight "Sublime installation failed"; exit 1; }
 
 highlight "<<< Setting up auto login >>>"
-bash auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
+chmod +x ./auto_login.sh
+echo $sudopass | sudo -S bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
 
-# End of main script execution
-highlight "All installations complete! Consider rebooting the system."
 
-# Stop the sudo keep-alive background job
-kill "$!"
+
+# reboot
+
+#
+# Speed up Ubuntu boot
+# https://itsfoss.com/speed-up-ubuntu-131
