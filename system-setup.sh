@@ -6,4 +6,4 @@ ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 export ZSH
 
 ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export ZSH ZDOTDIR
+export ZSH ZDOTDIRls
