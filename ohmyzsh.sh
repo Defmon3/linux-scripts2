@@ -39,6 +39,28 @@ export XDG_CONFIG_HOME="$XDG_CONFIG_HOME"
 export ZDOTDIR="$ZDOTDIR"
 EOF
 
+#!/bin/bash
+
+# Define the file path
+ZSHRC="$HOME/.config/zsh/.zshrc"
+
+# Check if the .zshrc file exists
+if [ ! -f "$ZSHRC" ]; then
+    echo "The file $ZSHRC does not exist."
+    exit 1
+fi
+
+# Backup the original .zshrc file before modifying
+cp "$ZSHRC" "${ZSHRC}.bak"
+
+# Use sed to replace the plugins line
+sed -i '' '/^plugins=(git)$/c\
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
+' "$ZSHRC"
+
+# Confirmation message
+echo "Plugins line updated successfully in $ZSHRC"
+
 
 # Change the default shell to zsh
 chsh -s $(which zsh)
