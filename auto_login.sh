@@ -2,7 +2,6 @@
 
 # Ensure the script is run as root
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" >&2
    exit 1
 fi
 
@@ -11,17 +10,15 @@ username=${SUDO_USER:-$(whoami)}
 
 # Validate the username
 if ! id "$username" &>/dev/null; then
-    echo "Error: User '$username' does not exist on the system." >&2
     exit 1
 fi
 
 # Backup the original configuration file with a timestamp
 backup_file="/etc/gdm3/custom.conf.$(date +%Y%m%d%H%M%S).bak"
-cp /etc/gdm3/custom.conf "$backup_file"
-echo "Backup of the original GDM configuration created at $backup_file"
+cp /etc/gdm3/custom.conf "$backup_file" &>/dev/null
 
 # Write the new configuration using the validated username
-cat <<EOF | sudo tee /etc/gdm3/custom.conf
+cat <<EOF | sudo tee /etc/gdm3/custom.conf >/dev/null
 # GDM configuration storage
 #
 # See /usr/share/gdm/gdm.schemas for a list of available options.
@@ -51,5 +48,3 @@ AutomaticLogin = $username
 # Additionally lets the X server dump core if it crashes
 #Enable=true
 EOF
-
-echo "GDM configuration updated for user $username. Please reboot your system to apply the changes."
