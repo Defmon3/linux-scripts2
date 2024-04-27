@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-highlight() {
-    echo -e "\033[1m\033[43m$1\033[0m"
-}
 
-ehighlight() {
-    echo -e "\033[1m\033[41m$1\033[0m"
-}
+highlight() { echo -e "\033[1m\033[43m$1\033[0m"; }
+ehighlight() { echo -e "\033[1m\033[41m$1\033[0m" >&2; }
 
+
+if ! command -v curl &>/dev/null || ! command -v git &>/dev/null; then
+    ehighlight "Required tools curl or git are not installed."
+    exit 1
+fi
 # Ensure XDG_CONFIG_HOME is set, default to ~/.config if not set
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 

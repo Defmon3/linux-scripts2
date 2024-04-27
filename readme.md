@@ -19,5 +19,5 @@ type: groups <your_username>
 type: reboot
 
 run:
-cd ~ && sudo apt-get install git -y && cd .config && (git clone https://github.com/Defmon3/linux-scripts2.git || (cd linux-scripts2 && git pull))  > /dev/null 2>&1 && sudo apt autoremove && cd linux-scripts2 && bash ./main.sh
+cd ~ && sudo apt-get install git -y && cd .config && (git clone https://github.com/Defmon3/linux-scripts2.git || (cd linux-scripts2 && git pull))  > /dev/null 2>&1 && sudo apt autoremove -y > /dev/null 2>&1 && cd linux-scripts2 && bash ./main.sh
 wget -qO- https://raw.githubusercontent.com/Defmon3/linux-scripts2/main/install.sh | sudo bash install.sh
