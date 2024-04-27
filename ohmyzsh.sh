@@ -10,7 +10,7 @@ ZSH_CUSTOM="$XDG_CONFIG_HOME/oh-my-zsh/custom"
 mkdir -p "$ZSH_CUSTOM/plugins" 2>/dev/null
 
 # Install Zsh and plugins
-if sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1; then
+if sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1; then
     echo "Zsh and plugins installed successfully."
 else
     echo "Error installing Zsh and plugins." >&2

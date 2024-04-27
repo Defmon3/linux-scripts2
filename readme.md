@@ -17,3 +17,5 @@ type: reboot
 sudo apt-get install git
 cd .config
 git clone https://github.com/Defmon3/linux-scripts2.git
+cd linux-scripts2
+bash ./main.sh
