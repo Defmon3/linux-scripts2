@@ -1,27 +1,34 @@
 #!/bin/bash
-echo "<<< Updating system >>>"
+
+# Function to highlight text
+highlight() {
+    echo -e "\033[1m\033[43m$1\033[0m"
+}
+
+# Main script begins
+highlight "<<< Updating system >>>"
 
 chmod +x ./system-setup.sh
-./system-setup.sh || { echo "System setup failed"; exit 1; }
+./system-setup.sh || { highlight "System setup failed"; exit 1; }
 
-echo "<<< Sudo update && upgrade >>>"
-sudo apt-get update -y >/dev/null 2>&1 || { echo "Update failed"; exit 1; }
-sudo apt-get upgrade -y >/dev/null 2>&1 || { echo "Upgrade failed"; exit 1; }
+highlight "<<< Sudo update && upgrade >>>"
+sudo apt-get update -y >/dev/null 2>&1 || { highlight "Update failed"; exit 1; }
+sudo apt-get upgrade -y >/dev/null 2>&1 || { highlight "Upgrade failed"; exit 1; }
 
-echo "<<< Installing Nala >>>"
-sudo apt-get install nala -y || { echo "Failed to install Nala"; exit 1; }
-sudo nala update -y
+highlight "<<< Installing Nala >>>"
+sudo apt-get install nala -y || { highlight "Failed to install Nala"; exit 1; }
+sudo nala update
 
-echo "<<< Installing Curl >>>"
-sudo nala install curl -y || { echo "Failed to install Curl"; exit 1; }
+highlight "<<< Installing Curl >>>"
+sudo nala install curl -y || { highlight "Failed to install Curl"; exit 1; }
 
-echo "<<< Installing oh-my-zsh >>>"
+highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
-./ohmyzsh.sh || { echo "oh-my-zsh installation failed"; exit 1; }
+./ohmyzsh.sh || { highlight "oh-my-zsh installation failed"; exit 1; }
 
-echo "<<< Installing sublime >>>"
+highlight "<<< Installing Sublime >>>"
 chmod +x ./sublime.sh
-./sublime.sh || { echo "Sublime installation failed"; exit 1; }
+./sublime.sh || { highlight "Sublime installation failed"; exit 1; }
 
 # Speed up Ubuntu boot
-# https://itsfoss.com/speed-up-ubuntu-1310/
+# https://itsfoss.com/speed-up-ubuntu-131
