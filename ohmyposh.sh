@@ -8,8 +8,8 @@ FONT_DIR=$HOME/.local/share/fonts
 THEME_DIR=/etc/oh-my-posh/themes  # Custom theme directory
 
 # Create directories if they do not exist
-sudo mkdir -p $FONT_DIR
-sudo mkdir -p $THEME_DIR
+mkdir -p $FONT_DIR
+mkdir -p $THEME_DIR
 
 # Download and install Fira Code Nerd Font
 echo "Downloading Fira Code Nerd Font..."
@@ -24,13 +24,13 @@ fc-cache -fv
 # Download and install Oh My Posh
 echo "Installing Oh My Posh..."
 sudo wget -qO /usr/local/bin/oh-my-posh "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64"
-sudo chmod +x /usr/local/bin/oh-my-posh
+chmod +x /usr/local/bin/oh-my-posh
 echo "Oh My Posh installed."
 
 # Download and extract themes
 echo "Setting up Oh My Posh themes..."
 wget -qO- "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip" > themes.zip
-sudo unzip themes.zip -d $THEME_DIR
+unzip themes.zip -d $THEME_DIR
 rm themes.zip
 echo "Themes installed."
 
