@@ -16,11 +16,6 @@ mkdir -p "$ZDOTDIR" "$ZSH_CUSTOM/plugins" || {
     exit 1
 }
 
-# Update /etc/zsh/zshenv to ensure it knows about ZDOTDIR
-sudo tee -a /etc/zsh/zshenv <<EOF
-export XDG_CONFIG_HOME="$XDG_CONFIG_HOME"
-export ZDOTDIR="$ZDOTDIR"
-EOF
 
 # Install Zsh and plugins
 if ! sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y > /dev/null 2>&1; then
@@ -58,6 +53,13 @@ highlight "Plugins cloned successfully."
 NEW_STRING="source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh\nsource $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\nsource $ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh\nsource $ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 echo -e "$NEW_STRING" > "$ZDOTDIR/.zshrc"
 highlight ".zshrc created and updated successfully."
+
+# Update /etc/zsh/zshenv to ensure it knows about ZDOTDIR
+sudo tee -a /etc/zsh/zshenv <<EOF
+export XDG_CONFIG_HOME="$XDG_CONFIG_HOME"
+export ZDOTDIR="$ZDOTDIR"
+EOF
+
 
 # Change the default shell to zsh
 chsh -s $(which zsh)
