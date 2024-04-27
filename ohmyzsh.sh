@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Install ZSH and plugins
-sudo apt install -y zsh-autosuggestions zsh-syntax-highlighting zsh
+sudo nala install -y zsh-autosuggestions zsh-syntax-highlighting zsh
 
 # Install Oh my ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Clone plugins to the desired directory
-ZSH_CUSTOM="$HOME/.config/xxx"
-mkdir -p "$ZSH_CUSTOM/plugins"
+ZSH_CUSTOM="$HOME/.config/oh-my-zsh/custom"
+mkdir -p "$ZSH_CUSTOM/plugins/custom"
 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
