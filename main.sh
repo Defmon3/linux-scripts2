@@ -1,17 +1,9 @@
 #!/bin/bash
+# main.sh and others
+source ./common.sh
+
 USERNAME="alpha"
-
-# Export the username so it can be accessed by other scripts
 export USERNAME
-# Function to highlight text
-highlight() {
-    echo -e "\033[1m\033[43m$1\033[0m"
-}
-
-ehighlight() {
-    echo -e "\033[1m\033[41m$1\033[0m"
-}
-
 
 # Main script begins
 highlight "<<< Updating system >>>"

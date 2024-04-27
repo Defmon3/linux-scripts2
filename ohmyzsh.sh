@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
-highlight() {
-    echo -e "\033[1m\033[43m$1\033[0m"
-}
+source ./util.sh
 
-ehighlight() {
-    echo -e "\033[1m\033[41m$1\033[0m"
-}
 
 # Ensure XDG_CONFIG_HOME is set, default to ~/.config if not set
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"

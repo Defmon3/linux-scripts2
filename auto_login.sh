@@ -1,12 +1,7 @@
 #!/bin/bash
 
-highlight() {
-    echo -e "\033[1m\033[43m$1\033[0m"
-}
-
-ehighlight() {
-    echo -e "\033[1m\033[41m$1\033[0m"
-}
+# main.sh and others
+source ./util.sh
 
 # Ensure the script is run as root
 if [[ $EUID -ne 0 ]]; then
