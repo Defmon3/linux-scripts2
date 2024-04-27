@@ -6,10 +6,21 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# Backup the original configuration file
-cp /etc/gdm3/custom.conf /etc/gdm3/custom.conf.bak
+# Determine the correct username
+username=${SUDO_USER:-$(whoami)}
 
-# Write the new configuration
+# Validate the username
+if ! id "$username" &>/dev/null; then
+    echo "Error: User '$username' does not exist on the system." >&2
+    exit 1
+fi
+
+# Backup the original configuration file with a timestamp
+backup_file="/etc/gdm3/custom.conf.$(date +%Y%m%d%H%M%S).bak"
+cp /etc/gdm3/custom.conf "$backup_file"
+echo "Backup of the original GDM configuration created at $backup_file"
+
+# Write the new configuration using the validated username
 cat <<EOF | sudo tee /etc/gdm3/custom.conf
 # GDM configuration storage
 #
@@ -21,7 +32,7 @@ cat <<EOF | sudo tee /etc/gdm3/custom.conf
 
 # Enabling automatic login
 AutomaticLoginEnable = true
-AutomaticLogin = $USER
+AutomaticLogin = $username
 
 # Enabling timed login
 # TimedLoginEnable = true
@@ -41,4 +52,4 @@ AutomaticLogin = $USER
 #Enable=true
 EOF
 
-echo "GDM configuration updated. A backup was made at /etc/gdm3/custom.conf.bak"
+echo "GDM configuration updated for user $username. Please reboot your system to apply the changes."
