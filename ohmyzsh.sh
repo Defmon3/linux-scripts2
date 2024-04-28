@@ -23,7 +23,7 @@ highlight "Plugins cloned successfully."
 
 
 dotfilePath="$HOME/.config/linux-scripts2/zsh/.zshrc"
-
+rm -f "$HOME/.zshrc"
 symlinkPath="$HOME/.zshrc"
 ln -s "$dotfilePath" "$symlinkPath"
 echo "Symlink created: $symlinkPath -> $(readlink -f $symlinkPath)"
