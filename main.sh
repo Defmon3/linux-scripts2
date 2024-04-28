@@ -8,10 +8,10 @@ red() { echo -e "\033[1m\033[41m$1\033[0m"; }
 
 green() { echo -e "\033[1m\033[42m$1\033[0m"; }
 
-debug=0
+debug=1
 execute_command() {
     local command=$1
-    yellow "Executing: $command"
+    yellow ">>> $command"
 
     if [ "$debug" -eq 1 ]; then
         if $command; then
@@ -21,7 +21,6 @@ execute_command() {
           exit 1
       fi
     else
-
       if $command >/dev/null 2>&1; then
         green "$command"
       else
