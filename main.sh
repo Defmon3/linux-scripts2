@@ -7,7 +7,19 @@ yellow() { echo -e "\033[1m\033[43m$1\033[0m"; }
 red() { echo -e "\033[1m\033[41m$1\033[0m"; }
 
 green() { echo -e "\033[1m\033[42m$1\033[0m"; }
-green "Starting main.sh"
+
+
+execute_command() {
+    local command=$1
+    yellow "Executing: $command"
+    if $command >/dev/null 2>&1; then
+    	green "$command"
+    else
+        red "$command"
+        exit 1
+    fi
+}
+green "\nStarting main.sh"
 
 #echo $SUDOPASS | sudo -S sh -c "echo '${SUDO_USER:-$(whoami)} ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/temp_nopasswd"
 
@@ -20,13 +32,12 @@ green "Sudo authentication successful."
 yellow "<<< Updating system >>>"
 yellow "<<< Sudo update && upgrade >>>"
 
-sudo apt-get update -y >/dev/null 2>&1 || { red "Update failed"; exit 1; }
-sudo apt-get upgrade -y >/dev/null 2>&1 || { red "Upgrade failed"; exit 1; }
+#sudo apt-get update -y >/dev/null 2>&1 || { red "Update failed"; exit 1; }
+#sudo apt-get upgrade -y >/dev/null 2>&1 || { red "Upgrade failed"; exit 1; }
 
 yellow "<<< Installing Nala >>>"
 
-sudo apt install nala -y > /dev/null 2>&1 || { red "Failed to install Nala"; exit 1; }
-echo "Updating Nala..."
+execute_command "sudo apt install nala"
 echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { red "Failed to update Nala"; exit 1; }
 
 yellow "<<< Installing $PACKAGES >>>"
