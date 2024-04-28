@@ -8,9 +8,9 @@ ehighlight() {
     echo -e "\033[1m\033[41m$1\033[0m"
 }
 
-read -sp "Enter your sudo password: " sudopass
-export SUDOPASS=$sudopass
-echo $SUDOPASS | sudo -S echo "Thank you for providing your password"
+read -sp "Enter your sudo password: " sudopass &&  export SUDOPASS=$sudopass && echo $SUDOPASS | sudo -S echo "Thank you for providing your password"
+
+
 
 if [ $? -ne 0 ]; then
     echo "Failed to authenticate with sudo."
