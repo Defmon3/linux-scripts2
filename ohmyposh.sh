@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Ask for the sudo password at the beginning of the script
-sudo -v
 
 # Define the installation directories
 FONT_DIR="$HOME/.local/share/fonts"
@@ -15,34 +14,13 @@ sudo chown -R $(whoami):$(whoami) "$THEME_DIR"
 
 # Download and install Fira Code Nerd Font
 echo "Downloading Fira Code Nerd Font..."
-wget -qO FiraCode.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip"
-unzip FiraCode.zip -d "$FONT_DIR"
-rm FiraCode.zip
-echo "Fira Code Nerd Font installed."
+wget -qO Hack.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip"
+unzip Hack.zip -d "$FONT_DIR"
+rm Hack.zip
+echo "Hack Code Nerd Font installed."
 
 # Update the font cache
 fc-cache -fv
 
 # Download and install Oh My Posh
-echo "Installing Oh My Posh..."
-sudo wget -qO /usr/local/bin/oh-my-posh "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64"
-sudo chmod +x /usr/local/bin/oh-my-posh
-echo "Oh My Posh installed."
-
-# Download and extract themes
-echo "Setting up Oh My Posh themes..."
-wget -qO themes.zip "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip"
-unzip themes.zip -d "$THEME_DIR"
-rm themes.zip
-echo "Themes installed."
-
-# Configure Zsh to use Oh My Posh
-SHELL_CONFIG="$HOME/.zshrc"
-
-echo "autoload -U promptinit; promptinit" >> "$SHELL_CONFIG"
-echo "function prompt_command() {" >> "$SHELL_CONFIG"
-echo "PROMPT='$(oh-my-posh --config $THEME_DIR/jandedobbeleer.omp.json)'" >> "$SHELL_CONFIG"
-echo "}" >> "$SHELL_CONFIG"
-echo "precmd_functions+=(prompt_command)" >> "$SHELL_CONFIG"
-
-echo "Oh My Posh setup complete. Please restart your terminal or source your .zshrc file."
+curl -s https://ohmyposh.dev/install.sh | bash -s
