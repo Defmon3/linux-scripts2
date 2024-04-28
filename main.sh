@@ -22,6 +22,7 @@ yellow "<<< Installing Nala >>>"
 echo $SUDOPASS | sudo -S apt install nala -y > /dev/null 2>&1 || { red "Failed to install Nala"; exit 1; }
 echo "Updating Nala..."
 echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { red "Failed to update Nala"; exit 1; }
+echo $SUDOPASS | sudo -S nala upgrade > /dev/null 2>&1 || { red "Failed to update Nala"; exit 1; }
 
 yellow "<<< Installing $PACKAGES >>>"
 echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y > /dev/null 2>&1 || {

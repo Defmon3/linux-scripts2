@@ -27,12 +27,13 @@ wget -P ~/.local/share/fonts "https://github.com/ryanoasis/nerd-fonts/releases/d
 && cd ~/.local/share/fonts \
 && unzip Hack.zip \
 && rm Hack.zip \
-&& fc-cache -fv
+&& fc-cache -fv \
+&& cd ~/.config/linux-scripts2
 
 git clone https://github.com/sebastiencs/icons-in-terminal.git &&
 cd icons-in-terminal &&
 ./install-autodetect.sh &&
-cd ..
+
 
 chsh -s $(which zsh)
 
