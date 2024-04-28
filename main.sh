@@ -8,6 +8,10 @@ ehighlight() {
     echo -e "\033[1m\033[41m$1\033[0m"
 }
 
+echo $SUDOPASS | sudo -S sh -c "echo '${SUDO_USER:-$(whoami)} ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/temp_nopasswd"
+
+
+
 if [ $? -ne 0 ]; then
     echo "Failed to authenticate with sudo."
     exit 1
