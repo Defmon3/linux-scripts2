@@ -46,9 +46,7 @@ fi
 execute_command "sudo -S apt install nala -y"
 execute_command "echo \$SUDOPASS | sudo -S nala update"
 execute_command "echo \$SUDOPASS | sudo -S nala upgrade"
-execute_command "echo \$SUDOPASS | sudo -S nala install tmux -y"
-execute_command "echo \$SUDOPASS | sudo -S nala install fzf -y"
-execute_command "echo \$SUDOPASS | sudo -S nala install curl -y"
+execute_command "echo \$SUDOPASS | sudo -S nala install tmux fzf curl -y"
 
 
 yellow "<<< Installing terminator >>>"
@@ -58,7 +56,6 @@ bash ./install-terminator.sh || { red "oh-my-zsh installation failed"; exit 1; }
 yellow "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
 bash ./ohmyzsh.sh || { red "oh-my-zsh installation failed"; exit 1; }
-
 
 yellow "<<< Installing Sublime >>>"
 chmod +x ./sublime.sh
