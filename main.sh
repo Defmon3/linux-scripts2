@@ -36,7 +36,6 @@ highlight "<<< Installing terminator >>>"
 chmod +x ./install-terminator.sh
 bash ./install-terminator.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
 
-
 highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
 bash ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
