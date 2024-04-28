@@ -6,10 +6,10 @@ ehighlight() { echo -e "\033[1m\033[41m$1\033[0m"; }
 
 export ZSH="$HOME/.config/oh-my-zsh"
 ZSH_CUSTOM="$HOME/.config/oh-my-zsh/custom"
-mkdir -p "$ZSH_CUSTOM" > /dev/null 2>&1
 sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+mkdir -p "$ZSH_CUSTOM" > /dev/null 2>&1
 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions" > /dev/null 2>&1
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" > /dev/null 2>&1
