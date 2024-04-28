@@ -30,7 +30,12 @@ echo "Updating Nala..."
 echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { ehighlight "Failed to update Nala"; exit 1; }
 
 highlight "<<< Installing Curl >>>"
-echo $SUDOPASS | sudo -S nala install curl terminator -y || { ehighlight "Failed to install Curl"; exit 1; }
+echo $SUDOPASS | sudo -S nala install curl -y || { ehighlight "Failed to install Curl"; exit 1; }
+
+highlight "<<< Installing terminator >>>"
+chmod +x ./install-terminator.sh
+bash ./install-terminator.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
+
 
 highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
