@@ -40,9 +40,6 @@ highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
 bash ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
 
-#highlight "<<< Installing oh-my-posh >>>"
-#chmod +x ./ohmyposh.sh
-#./ohmyposh.sh || { ehighlight "oh-my-posh installation failed"; exit 1; }
 
 highlight "<<< Installing Sublime >>>"
 chmod +x ./sublime.sh

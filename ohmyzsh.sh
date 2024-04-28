@@ -13,7 +13,7 @@ mkdir -p "$ZSH_CUSTOM" > /dev/null 2>&1
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH/plugins/zsh-syntax-highlighting
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git $ZSH/plugins/fast-syntax-highlighting
-git clone --depth 1  https://github.com/marlonrichert/zsh-autocomplete.git $ZSH/plugins/zsh-autocomplete
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH/plugins/zsh-autocomplete
 
 
 dotfilePath="$HOME/.config/linux-scripts2/zsh/.zshrc"
@@ -22,5 +22,12 @@ symlinkPath="$HOME/.zshrc"
 ln -s "$dotfilePath" "$symlinkPath"
 echo "Symlink created: $symlinkPath -> $(readlink -f $symlinkPath)"
 
+wget -P ~/.local/share/fonts "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip" \
+&& cd ~/.local/share/fonts \
+&& unzip Hack.zip \
+&& rm Hack.zip \
+&& fc-cache -fv
 
+git clone https://github.com/sebastiencs/icons-in-terminal.git $HOME/.local/share/icons-in-terminal
+./$HOME/.local/share/icons-in-terminal/install-autodetect.sh
 chsh -s $(which zsh)
