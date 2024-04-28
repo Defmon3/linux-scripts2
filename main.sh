@@ -1,19 +1,20 @@
 #!/bin/bash
 # main.sh and others
 
-PACKAGES=(tmux fzf curl)
+
 yellow() { echo -e "\033[1m\033[43m$1\033[0m"; }
 
 red() { echo -e "\033[1m\033[41m$1\033[0m"; }
 
 green() { echo -e "\033[1m\033[42m$1\033[0m"; }
 
-debug=1
+debug=0
 execute_command() {
     local command=$1
+    local local_debug="${2:-$debug}"
     yellow ">>> $command"
 
-    if [ "$debug" -eq 1 ]; then
+    if [ "$local_debug" -eq 1 ]; then
         if $command; then
         green "$command"
       else
@@ -40,23 +41,14 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-green "Sudo authentication successful."
-yellow "<<< Updating system >>>"
-yellow "<<< Sudo update && upgrade >>>"
 
-#sudo apt-get update -y >/dev/null 2>&1 || { red "Update failed"; exit 1; }
-#sudo apt-get upgrade -y >/dev/null 2>&1 || { red "Upgrade failed"; exit 1; }
-
-yellow "<<< Installing Nala >>>"
 
 execute_command "sudo -S apt install nala"
-echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { red "Failed to update Nala"; exit 1; }
-
-yellow "<<< Installing $PACKAGES >>>"
-echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y > /dev/null 2>&1 || {
-    echo "Failed to install $PACKAGES" >&2  # using echo for error message
-    exit 1
-}
+execute_command "echo \$SUDOPASS | sudo -S nala update"
+execute_command "echo \$SUDOPASS | sudo -S nala upgrade"
+execute_command "echo \$SUDOPASS | sudo -S nala install tmux -y"
+execute_command "echo \$SUDOPASS | sudo -S nala install fzf -y"
+execute_command "echo \$SUDOPASS | sudo -S nala install curl -y"
 
 
 yellow "<<< Installing terminator >>>"
