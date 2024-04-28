@@ -43,7 +43,7 @@ fi
 
 
 
-execute_command "sudo -S apt install nala"
+execute_command "sudo -S apt install nala -y"
 execute_command "echo \$SUDOPASS | sudo -S nala update"
 execute_command "echo \$SUDOPASS | sudo -S nala upgrade"
 execute_command "echo \$SUDOPASS | sudo -S nala install tmux -y"
