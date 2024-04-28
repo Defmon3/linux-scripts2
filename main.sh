@@ -8,7 +8,7 @@ red() { echo -e "\033[1m\033[41m$1\033[0m"; }
 
 green() { echo -e "\033[1m\033[42m$1\033[0m"; }
 
-
+debug=0
 execute_command() {
     local command=$1
     yellow "Executing: $command"
