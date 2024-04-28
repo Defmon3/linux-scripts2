@@ -1,55 +1,55 @@
 #!/bin/bash
 # main.sh and others
-highlight() {
-    echo -e "\033[1m\033[43m$1\033[0m"
-}
 
-ehighlight() {
-    echo -e "\033[1m\033[41m$1\033[0m"
-}
+PACKAGES=(tmux fzf curl)
+yellow() { echo -e "\033[1m\033[43m$1\033[0m"; }
+
+red() { echo -e "\033[1m\033[41m$1\033[0m"; }
+
+green() { echo -e "\033[1m\033[42m$1\033[0m"; }
+green "Starting main.sh"
 
 #echo $SUDOPASS | sudo -S sh -c "echo '${SUDO_USER:-$(whoami)} ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/temp_nopasswd"
 
-
-
 if [ $? -ne 0 ]; then
-    echo "Failed to authenticate with sudo."
+    red "Failed to authenticate with sudo."
     exit 1
 fi
 
-# If the script reaches this point, the sudo authentication was successful
-echo "Sudo authentication successful."
+green "Sudo authentication successful."
+yellow "<<< Updating system >>>"
+yellow "<<< Sudo update && upgrade >>>"
 
+sudo apt-get update -y >/dev/null 2>&1 || { red "Update failed"; exit 1; }
+sudo apt-get upgrade -y >/dev/null 2>&1 || { red "Upgrade failed"; exit 1; }
 
-# Main script begins
-highlight "<<< Updating system >>>"
+yellow "<<< Installing Nala >>>"
 
-highlight "<<< Sudo update && upgrade >>>"
-sudo apt-get update -y >/dev/null 2>&1 || { ehighlight "Update failed"; exit 1; }
-sudo apt-get upgrade -y >/dev/null 2>&1 || { ehighlight "Upgrade failed"; exit 1; }
-
-highlight "<<< Installing Nala >>>"
-sudo apt install nala -y > /dev/null 2>&1 || { ehighlight "Failed to install Nala"; exit 1; }
+sudo apt install nala -y > /dev/null 2>&1 || { red "Failed to install Nala"; exit 1; }
 echo "Updating Nala..."
-echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { ehighlight "Failed to update Nala"; exit 1; }
+echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { red "Failed to update Nala"; exit 1; }
 
-highlight "<<< Installing Curl >>>"
-echo $SUDOPASS | sudo -S nala install curl -y || { ehighlight "Failed to install Curl"; exit 1; }
+yellow "<<< Installing $PACKAGES >>>"
+echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y > /dev/null 2>&1 || {
+    echo "Failed to install $PACKAGES" >&2  # using echo for error message
+    exit 1
+}
 
-highlight "<<< Installing terminator >>>"
+
+yellow "<<< Installing terminator >>>"
 chmod +x ./install-terminator.sh
-bash ./install-terminator.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
+bash ./install-terminator.sh || { red "oh-my-zsh installation failed"; exit 1; }
 
-highlight "<<< Installing oh-my-zsh >>>"
+yellow "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh
-bash ./ohmyzsh.sh || { ehighlight "oh-my-zsh installation failed"; exit 1; }
+bash ./ohmyzsh.sh || { red "oh-my-zsh installation failed"; exit 1; }
 
 
-highlight "<<< Installing Sublime >>>"
+yellow "<<< Installing Sublime >>>"
 chmod +x ./sublime.sh
-./sublime.sh || { ehighlight "Sublime installation failed"; exit 1; }
+./sublime.sh || { red "Sublime installation failed"; exit 1; }
 
-highlight "<<< Setting up auto login >>>"
+yellow "<<< Setting up auto login >>>"
 chmod +x ./auto_login.sh
 echo $SUDOPASS | sudo -S bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
 

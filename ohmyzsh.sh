@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 highlight() { echo -e "\033[1m\033[43m$1\033[0m"; }
 ehighlight() { echo -e "\033[1m\033[41m$1\033[0m"; }
 
@@ -33,7 +34,6 @@ cd icons-in-terminal &&
 ./install-autodetect.sh &&
 cd ..
 
-echo $SUDOPASS | sudo -S chsh -s $(which zsh) ${SUDO_USER:-$(whoami)}
+chsh -s $(which zsh)
 
-ehighlight "Tried setting shell to zsh, result> $SHELL"
 echo # Restart your terminal
