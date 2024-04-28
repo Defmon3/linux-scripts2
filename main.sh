@@ -12,12 +12,25 @@ green() { echo -e "\033[1m\033[42m$1\033[0m"; }
 execute_command() {
     local command=$1
     yellow "Executing: $command"
-    if $command >/dev/null 2>&1; then
-    	green "$command"
+
+    if [ "$debug" -eq 1 ]; then
+        if $command; then
+        green "$command"
+      else
+          red "$command"
+          exit 1
+      fi
     else
-        red "$command"
-        exit 1
+
+      if $command >/dev/null 2>&1; then
+        green "$command"
+      else
+          red "$command"
+          exit 1
+      fi
     fi
+
+
 }
 green "\nStarting main.sh"
 
@@ -37,7 +50,7 @@ yellow "<<< Sudo update && upgrade >>>"
 
 yellow "<<< Installing Nala >>>"
 
-execute_command "sudo apt install nala"
+execute_command "sudo -S apt install nala"
 echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { red "Failed to update Nala"; exit 1; }
 
 yellow "<<< Installing $PACKAGES >>>"
