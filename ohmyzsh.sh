@@ -33,3 +33,4 @@ cd icons-in-terminal &&
 ./install-autodetect.sh &&
 cd ..
 echo $SUDOPASS | sudo -S chsh -s $(which zsh)
+echo # Restart your terminal
