@@ -28,6 +28,8 @@ wget -P ~/.local/share/fonts "https://github.com/ryanoasis/nerd-fonts/releases/d
 && rm Hack.zip \
 && fc-cache -fv
 
-git clone https://github.com/sebastiencs/icons-in-terminal.git
-./install-autodetect.sh && rm -rf icons-in-terminal
+git clone https://github.com/sebastiencs/icons-in-terminal.git &&
+cd icons-in-terminal &&
+./install-autodetect.sh &&
+cd .. && rm -rf icons-in-terminal
 echo $SUDOPASS | sudo -S chsh -s $(which zsh)

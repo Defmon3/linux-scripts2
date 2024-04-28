@@ -43,7 +43,7 @@ chmod +x ./sublime.sh
 
 highlight "<<< Setting up auto login >>>"
 chmod +x ./auto_login.sh
-echo $sudopass | sudo -S bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
+echo $SUDOPASS | sudo -S bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
 
 
 
