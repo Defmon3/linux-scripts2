@@ -44,11 +44,11 @@ fi
 
 
 execute_command "sudo -S apt install nala -y"
-execute_command "echo \$SUDOPASS | sudo -S nala update"
-execute_command "echo \$SUDOPASS | sudo -S nala upgrade"
-execute_command "echo \$SUDOPASS | sudo -S nala install tmux fzf curl -y"
+execute_command "echo $SUDOPASS | sudo -S nala update"
+execute_command "echo $SUDOPASS | sudo -S nala upgrade"
+execute_command "echo $SUDOPASS | sudo -S nala install tmux fzf curl -y"
 
-
+exit 1
 yellow "<<< Installing terminator >>>"
 chmod +x ./install-terminator.sh
 bash ./install-terminator.sh || { red "oh-my-zsh installation failed"; exit 1; }
