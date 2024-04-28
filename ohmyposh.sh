@@ -3,24 +3,20 @@
 # Ask for the sudo password at the beginning of the script
 
 # Define the installation directories
-FONT_DIR="$HOME/.local/share/fonts"
-THEME_DIR="$HOME/.local/oh-my-posh/themes"  # Corrected theme directory
+BIN_DIR="$HOME/bin"
+
+
+wget -P ~/.local/share/fonts "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip" \
+&& cd ~/.local/share/fonts \
+&& unzip Hack.zip \
+&& rm Hack.zip \
+&& fc-cache -fv
+
 
 # Create directories if they do not exist
-sudo mkdir -p "$FONT_DIR"
-sudo mkdir -p "$THEME_DIR"
-sudo chown -R $(whoami):$(whoami) "$FONT_DIR"
-sudo chown -R $(whoami):$(whoami) "$THEME_DIR"
+sudo mkdir -p "$BIN_DIR"
+sudo chown -R $(whoami):$(whoami) "$BIN_DIR"
+curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$BIN_DIR"
 
-# Download and install Fira Code Nerd Font
-echo "Downloading Fira Code Nerd Font..."
-wget -qO Hack.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip"
-unzip Hack.zip -d "$FONT_DIR"
-rm Hack.zip
-echo "Hack Code Nerd Font installed."
+echo 'eval "$(oh-my-posh init zsh)"' >> ~/.zshrc
 
-# Update the font cache
-fc-cache -fv
-
-# Download and install Oh My Posh
-curl -s https://ohmyposh.dev/install.sh | bash -s

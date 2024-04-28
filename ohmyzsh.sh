@@ -25,10 +25,4 @@ ln -s "$dotfilePath" "$symlinkPath"
 echo "Symlink created: $symlinkPath -> $(readlink -f $symlinkPath)"
 
 
-wget -P ~/.local/share/fonts "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip" \
-&& cd ~/.local/share/fonts \
-&& unzip Hack.zip \
-&& rm Hack.zip \
-&& fc-cache -fv
-
 chsh -s $(which zsh)
