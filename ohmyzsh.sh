@@ -32,5 +32,6 @@ git clone https://github.com/sebastiencs/icons-in-terminal.git &&
 cd icons-in-terminal &&
 ./install-autodetect.sh &&
 cd ..
+ehighlight "chsh with password $SUDOPASS"
 echo $SUDOPASS | sudo -S chsh -s $(which zsh)
 echo # Restart your terminal
