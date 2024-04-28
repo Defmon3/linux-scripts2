@@ -8,10 +8,6 @@ ehighlight() {
     echo -e "\033[1m\033[41m$1\033[0m"
 }
 
-read -sp "Enter your sudo password: " sudopass &&  export SUDOPASS=$sudopass && echo $SUDOPASS | sudo -S echo "Thank you for providing your password"
-
-
-
 if [ $? -ne 0 ]; then
     echo "Failed to authenticate with sudo."
     exit 1
@@ -31,10 +27,10 @@ sudo apt-get upgrade -y >/dev/null 2>&1 || { ehighlight "Upgrade failed"; exit 1
 highlight "<<< Installing Nala >>>"
 sudo apt install nala -y > /dev/null 2>&1 || { ehighlight "Failed to install Nala"; exit 1; }
 echo "Updating Nala..."
-sudo nala update > /dev/null 2>&1 || { ehighlight "Failed to update Nala"; exit 1; }
+echo $SUDOPASS | sudo -S nala update > /dev/null 2>&1 || { ehighlight "Failed to update Nala"; exit 1; }
 
 highlight "<<< Installing Curl >>>"
-sudo nala install curl terminator -y || { ehighlight "Failed to install Curl"; exit 1; }
+echo $SUDOPASS | sudo -S nala install curl terminator -y || { ehighlight "Failed to install Curl"; exit 1; }
 
 highlight "<<< Installing oh-my-zsh >>>"
 chmod +x ./ohmyzsh.sh

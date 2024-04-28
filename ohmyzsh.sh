@@ -5,7 +5,7 @@ ehighlight() { echo -e "\033[1m\033[41m$1\033[0m"; }
 
 
 export ZSH="$HOME/.config/oh-my-zsh"
-sudo nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y
+echo $SUDOPASS | sudo -S nala install zsh zsh-autosuggestions zsh-syntax-highlighting -y
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 mkdir -p "$ZSH_CUSTOM" > /dev/null 2>&1
@@ -29,6 +29,5 @@ wget -P ~/.local/share/fonts "https://github.com/ryanoasis/nerd-fonts/releases/d
 && fc-cache -fv
 
 git clone https://github.com/sebastiencs/icons-in-terminal.git
-./install-autodetect.sh
-chsh -s $(which zsh)
-rm -rf icons-in-terminal
+./install-autodetect.sh && rm -rf icons-in-terminal
+echo $SUDOPASS | sudo -S chsh -s $(which zsh)

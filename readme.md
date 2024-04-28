@@ -19,4 +19,9 @@ type: groups <your_username>
 type: reboot
 
 run:
-cd ~ && sudo apt install git -y && cd .config && (git clone https://github.com/Defmon3/linux-scripts2.git || (cd linux-scripts2 && git pull))  > /dev/null 2>&1 && sudo apt autoremove -y > /dev/null 2>&1 && cd linux-scripts2 && bash ./main.sh
+read -sp "Enter your sudo password: " sudopass &&
+export SUDOPASS=$sudopass &&
+echo $SUDOPASS | sudo -S echo "Thank you for providing your password" &&
+cd ~ && echo $SUDOPASS | sudo -S apt install git -y && cd .config &&
+(git clone https://github.com/Defmon3/linux-scripts2.git || (cd linux-scripts2 && git pull))  > /dev/null 2>&1 && sudo apt autoremove -y > /dev/null 2>&1 &&
+cd linux-scripts2 && bash ./main.sh
