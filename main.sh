@@ -1,6 +1,6 @@
 #!/bin/bash
 # main.sh and others
-
+#Working
 PACKAGES=(tmux fzf curl)
 yellow() { echo -e "\033[1m\033[43m$1\033[0m"; }
 
