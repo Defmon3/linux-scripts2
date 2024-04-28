@@ -31,5 +31,5 @@ wget -P ~/.local/share/fonts "https://github.com/ryanoasis/nerd-fonts/releases/d
 git clone https://github.com/sebastiencs/icons-in-terminal.git &&
 cd icons-in-terminal &&
 ./install-autodetect.sh &&
-cd .. && rm -rf icons-in-terminal
+cd ..
 echo $SUDOPASS | sudo -S chsh -s $(which zsh)

@@ -19,6 +19,8 @@ type: groups <your_username>
 type: reboot
 
 run:
+
+
 read -sp "Enter your sudo password: " sudopass &&
 export SUDOPASS=$sudopass &&
 echo $SUDOPASS | sudo -S echo "Thank you for providing your password" &&
