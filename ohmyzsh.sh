@@ -32,6 +32,8 @@ git clone https://github.com/sebastiencs/icons-in-terminal.git &&
 cd icons-in-terminal &&
 ./install-autodetect.sh &&
 cd ..
-ehighlight "chsh with password $SUDOPASS"
-echo $SUDOPASS | sudo -S chsh -s $(which zsh)
+
+echo $SUDOPASS | sudo -S chsh -s $(which zsh) ${SUDO_USER:-$(whoami)}
+
+ehighlight "Tried setting shell to zsh, result> $SHELL"
 echo # Restart your terminal
