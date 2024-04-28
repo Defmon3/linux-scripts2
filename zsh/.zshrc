@@ -1,16 +1,16 @@
 
 export ZSH="$HOME/.config/oh-my-zsh"
-
+export ZSH_CUSTOM="$ZSH/custom"
 ZSH_THEME="agnoster"
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
 
 source $ZSH/oh-my-zsh.sh
 
-source "$HOME/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOME/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$HOME/.config/oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-source "$HOME/.config/oh-my-zsh/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+source "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$ZSH_CUSTOM/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 
 # export MANPATH="/usr/local/man:$MANPATH"
