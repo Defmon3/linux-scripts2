@@ -13,8 +13,9 @@ if not os.path.exists(config):
     os.makedirs(config)
 print("Made dirs")
 print(f"SUDOPASS = {sudopass}")
-os.system(f"export SUDOPASS={sudopass}")
-os.system('echo $SUDOPASS |sudo -S apt update')
+os.system(f"export SUDOPASS={sudopass};")
+
+os.system('echo $SUDOPASS |sudo -S apt update;')
 os.system('echo $SUDOPASS | sudo -S apt install git -y > /dev/null 2>&1 &&')
 os.chdir(config)
 print("Cloning repo")
