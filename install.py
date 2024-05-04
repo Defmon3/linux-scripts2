@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 import os
-import sys
 import subprocess
 
-if len(sys.argv) < 2:
-    print("Usage: python script.py <sudo_password>")
-    sys.exit(1)
-sudopass = sys.argv[1]
+# Prompt the user for their sudo password
+sudopass = input("Enter your sudo password: ")
 
 home = os.path.expanduser("~")
 config = os.path.join(home, ".config")
