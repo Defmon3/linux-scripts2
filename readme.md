@@ -20,6 +20,7 @@ type: reboot
 
 run:
 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Defmon3/linux-scripts2/master/install.py)" | python3
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Defmon3/linux-scripts2/master/install.sh)"
 cd ~ && 
