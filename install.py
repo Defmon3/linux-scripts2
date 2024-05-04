@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import subprocess
 
 if len(sys.argv) < 2:
     print("Usage: python script.py <sudo_password>")
@@ -12,11 +13,15 @@ config = os.path.join(home, ".config")
 if not os.path.exists(config):
     os.makedirs(config)
 print("Made dirs")
-print(f"SUDOPASS = {sudopass}")
-os.system(f"export SUDOPASS={sudopass};")
-print(1)
-os.system('echo $SUDOPASS |sudo -S apt update;')
-print(2)
+
+# Use subprocess to pass the password to sudo
+command = "sudo -S apt update"
+proc = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+output, error = proc.communicate(input=sudopass.encode() + b'\n')
+print(output.decode())
+print(error.decode())
+sys.exit(1)
+
 os.system('echo $SUDOPASS | sudo -S apt install git -y > /dev/null 2>&1 &&')
 os.chdir(config)
 print("Cloning repo")
