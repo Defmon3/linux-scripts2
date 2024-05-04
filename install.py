@@ -3,6 +3,7 @@ home = os.path.expanduser("~")
 config = os.path.join(home, ".config")
 if not os.path.exists(config):
     os.makedirs(config)
+print("Made dirs")
 sudopass = input('Enter your sudo password: ')
 os.system(f"export SUDOPASS={sudopass}")
 os.system('sudo -S apt update')
