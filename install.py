@@ -1,10 +1,18 @@
+#!/usr/bin/env python3
+import sys
+
+if len(sys.argv) < 2:
+    print("Usage: python script.py <sudo_password>")
+    sys.exit(1)
+sudopass = sys.argv[1]
+
 import os
 home = os.path.expanduser("~")
 config = os.path.join(home, ".config")
 if not os.path.exists(config):
     os.makedirs(config)
 print("Made dirs")
-sudopass = input('Enter your sudo password: ')
+sudopass = input("Enter your sudo password: ")
 os.system(f"export SUDOPASS={sudopass}")
 os.system('sudo -S apt update')
 os.system('echo $SUDOPASS | sudo -S apt install git -y > /dev/null 2>&1 &&')

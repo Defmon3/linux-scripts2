@@ -3,13 +3,10 @@
 #Working
 PACKAGES=(tmux fzf curl)
 yellow() { echo -e "\033[1m\033[43m$1\033[0m"; }
-
 red() { echo -e "\033[1m\033[41m$1\033[0m"; }
-
 green() { echo -e "\033[1m\033[42m$1\033[0m"; }
 green "\nStarting main.sh"
 
-#echo $SUDOPASS | sudo -S sh -c "echo '${SUDO_USER:-$(whoami)} ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/temp_nopasswd"
 [ $? -ne 0 ] && { red "Failed to add NOPASSWD to sudoers"; exit 1; }
 
 
