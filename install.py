@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 import subprocess
-
+import sys
 # Prompt the user for their sudo password
 sudopass = input("Enter your sudo password: ")
 
