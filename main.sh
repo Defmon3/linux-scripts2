@@ -10,11 +10,7 @@ green() { echo -e "\033[1m\033[42m$1\033[0m"; }
 green "\nStarting main.sh"
 
 #echo $SUDOPASS | sudo -S sh -c "echo '${SUDO_USER:-$(whoami)} ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/temp_nopasswd"
-
-if [ $? -ne 0 ]; then
-    red "Failed to authenticate with sudo."
-    exit 1
-fi
+[ $? -ne 0 ] && { red "Failed to add NOPASSWD to sudoers"; exit 1; }
 
 
 yellow "<<< Installing Nala >>>"
@@ -26,8 +22,7 @@ echo $SUDOPASS | sudo -S nala upgrade
 
 yellow "<<< Installing $PACKAGES >>>"
 echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y > /dev/null 2>&1 || {
-    echo "Failed to install $PACKAGES" >&2  # using echo for error message
-    exit 1
+  echo "Failed to install $PACKAGES" >&2; exit 1;
 }
 
 

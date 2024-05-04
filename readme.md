@@ -20,7 +20,10 @@ type: reboot
 
 run:
 
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Defmon3/linux-scripts2/master/install.sh)"
 cd ~ && 
+mkdir .config > /dev/null 2>&1 ;
 read -sp "Enter your sudo password: " sudopass &&
 export SUDOPASS=$sudopass > /dev/null 2>&1 &&
 echo $SUDOPASS | sudo -S apt install git -y > /dev/null 2>&1 &&
