@@ -1,3 +1,2 @@
-pip install -r requirements.txt
 cd ~ || exit 1
-python3 install.py
+sh -c "$(curl -f https://raw.githubusercontent.com/Defmon3/linux-scripts2/master/install.py)" | python3

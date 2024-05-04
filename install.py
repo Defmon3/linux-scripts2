@@ -1,9 +1,8 @@
 import os
-from pathlib import Path
-
-home = Path('~')
-config = home / '.config'
-config.mkdir(exist_ok=True)
+home = os.path.expanduser("~")
+config = os.path.join(home, ".config")
+if not os.path.exists(config):
+    os.makedirs(config)
 sudopass = input('Enter your sudo password: ')
 os.system(f"export SUDOPASS={sudopass}")
 os.system('sudo -S apt update')
