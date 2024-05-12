@@ -26,7 +26,6 @@ echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y || {
   echo "Failed to install $PACKAGES" >&2; exit 1;
 }
 
-
 yellow "<<< Installing terminator >>>"
 chmod +x ./install-terminator.sh
 bash ./install-terminator.sh || { red "oh-my-zsh installation failed"; exit 1; }
