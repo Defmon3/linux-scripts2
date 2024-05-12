@@ -22,7 +22,7 @@ echo $SUDOPASS | sudo -S nala update
 #echo $SUDOPASS | sudo -S nala upgrade
 
 yellow "<<< Installing $PACKAGES >>>"
-echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y > /dev/null 2>&1 || {
+echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y || {
   echo "Failed to install $PACKAGES" >&2; exit 1;
 }
 
