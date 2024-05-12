@@ -1,7 +1,11 @@
 #!/bin/bash
 # main.sh and others
 #Working
-PACKAGES=(tmux fzf curl)
+
+echo %
+PACKAGES=(tmux fzf curl exa)
+
+
 yellow() { echo -e "\033[1m\033[43m$1\033[0m"; }
 red() { echo -e "\033[1m\033[41m$1\033[0m"; }
 green() { echo -e "\033[1m\033[42m$1\033[0m"; }
@@ -15,7 +19,7 @@ yellow "<<< Installing Nala >>>"
 echo $SUDOPASS | sudo -S apt install nala -y
 echo "Updating Nala..."
 echo $SUDOPASS | sudo -S nala update
-echo $SUDOPASS | sudo -S nala upgrade
+#echo $SUDOPASS | sudo -S nala upgrade
 
 yellow "<<< Installing $PACKAGES >>>"
 echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y > /dev/null 2>&1 || {

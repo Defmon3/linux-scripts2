@@ -1,4 +1,14 @@
-cd ~ || exit 1
-#sh -c "$(curl -f https://raw.githubusercontent.com/Defmon3/linux-scripts2/master/install.sh)" | bash
-sh -c "$(curl -f https://raw.githubusercontent.com/Defmon3/linux-scripts2/master/install.py)" | python3
-echo "Enter your sudo password:" && read -s sudopass && wget -qO- https://raw.githubusercontent.com/Defmon3/linux-scripts2/master/install.py | python3 - "$sudopass"
+#!/bin/bash
+
+PACKAGES=(tmux fzf curl exa)
+
+
+
+# Install nala first for speed and convenience
+bash ./apt_installs/nala.sh
+
+# Install the rest of the packages
+yellow "<<< Installing $PACKAGES >>>"
+echo $SUDOPASS | sudo -S nala install "${PACKAGES[@]}" -y > /dev/null 2>&1 || {
+  echo "Failed to install $PACKAGES" >&2; exit 1;
+}
