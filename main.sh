@@ -40,7 +40,7 @@ yellow "<<< Installing Sublime >>>"
 chmod +x ./sublime.sh
 ./sublime.sh || { red "Sublime installation failed"; exit 1; }
 
-yellow "<<< Setting up auto login >>>"
-chmod +x ./auto_login.sh
-echo $SUDOPASS | sudo -S bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
+#yellow "<<< Setting up auto login >>>"
+#chmod +x ./auto_login.sh
+#echo $SUDOPASS | sudo -S bash ./auto_login.sh || { echo 'Auto login setup failed'; exit 1; }
 
