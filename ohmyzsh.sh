@@ -95,6 +95,12 @@ sed -i 's#^export ZSH=.*#export ZSH="'"$OMZ_DIR"'"#' "$ZSHRC_PATH" || {
 # echo "export ZSH_CUSTOM=\"\$ZSH/custom\"" >> "$ZSHRC_PATH"
 echo "Patched ZSH path in $ZSHRC_PATH"
 
+highlight "<<< Ensuring correct plugins are set in $ZSHRC_PATH >>>"
+# Set desired plugins list explicitly
+sed -i 's/^plugins=(.*)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)/' "$ZSHRC_PATH" || {
+    echo "plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)" >> "$ZSHRC_PATH"
+}
+
 highlight "<<< Cloning Zsh plugins into custom location >>>"
 # Define ZSH_CUSTOM based on the actual OMZ directory for clarity
 ZSH_CUSTOM="$OMZ_DIR/custom"
