@@ -41,10 +41,24 @@ cd ~
 highlight "<<< Setting Zsh as default shell >>>"
 chsh -s "$(command -v zsh)"
 
-# Set ZDOTDIR so Zsh loads from .config
-mkdir -p ~/.config/zsh
-cat <<EOF > ~/.zshenv
-export ZDOTDIR="\$HOME/.config/zsh"
-EOF
+highlight "<<< Wiring up ZDOTDIR and Zsh config >>>"
 
-highlight "✅ Done. Start a new terminal session or run 'exec zsh' to activate Zsh."
+# Set ZDOTDIR so Zsh loads from .config
+echo 'export ZDOTDIR="$HOME/.config/zsh"' > ~/.zshenv
+mkdir -p ~/.config/zsh
+
+# Move .zshrc into ZDOTDIR path if it exists
+if [ -f "$HOME/.zshrc" ]; then
+    mv "$HOME/.zshrc" "$HOME/.config/zsh/.zshrc"
+fi
+
+# Patch ZSH/ZSH_CUSTOM path in config
+if [ -f "$HOME/.config/zsh/.zshrc" ]; then
+    sed -i 's|^export ZSH=.*|export ZSH="$HOME/.config/oh-my-zsh"|' "$HOME/.config/zsh/.zshrc" || true
+    sed -i 's|^export ZSH_CUSTOM=.*|export ZSH_CUSTOM="$ZSH/custom"|' "$HOME/.config/zsh/.zshrc" || true
+
+    # Ensure oh-my-zsh is sourced
+    grep -q 'oh-my-zsh.sh' "$HOME/.config/zsh/.zshrc" || echo 'source $ZSH/oh-my-zsh.sh' >> "$HOME/.config/zsh/.zshrc"
+fi
+
+highlight "✅ Done. Restart terminal or run 'exec zsh' to apply changes."
