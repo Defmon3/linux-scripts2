@@ -3,7 +3,7 @@
 #Working
 
 echo %
-PACKAGES=(tmux fzf curl exa)
+PACKAGES=(tmux fzf curl eza)
 
 
 yellow() { echo -e "\033[1m\033[43m$1\033[0m"; }
