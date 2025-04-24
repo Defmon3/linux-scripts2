@@ -1,4 +1,4 @@
-
+# File: .zshrc
 export ZSH="$HOME/.config/oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 ZSH_THEME="agnoster"
