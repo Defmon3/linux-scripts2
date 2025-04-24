@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGES=(tmux fzf curl exa <)
+PACKAGES=(tmux fzf curl eza <)
 
 
 
